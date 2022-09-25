@@ -1,0 +1,20 @@
+server:
+  port: 12345
+
+spring:
+  profiles:
+    active: usage_message
+
+  rabbitmq:
+    host: localhost
+    username: localrabbit
+    password: localrabbit
+    virtual-host: /
+
+logging:
+  level:
+    org: ERROR
+
+tutorial:
+  client:
+    duration: 10000
