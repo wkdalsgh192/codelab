@@ -15,14 +15,13 @@ public class Config {
     }
 
     @Bean
-//    @Profile("receiver")
     public Receiver receiver() {
         return new Receiver();
     }
 
     @Bean
 //    @Profile("sender")
-    public Sender sender() {
-        return new Sender();
+    public Tut1Sender sender() {
+        return new Tut1Sender();
     }
 }

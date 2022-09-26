@@ -1,19 +1,20 @@
-package com.mino.springlab.tut3;
+package com.mino.springlab.scenario3;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Component
+@RequiredArgsConstructor
 public class Tut3Sender {
 
-    @Autowired
-    private RabbitTemplate template;
+    private final RabbitTemplate template;
 
-    @Autowired
-    private FanoutExchange fanoutExchange;
+    private final FanoutExchange fanoutExchange;
 
     AtomicInteger dots = new AtomicInteger(0);
 

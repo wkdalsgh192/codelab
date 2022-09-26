@@ -1,4 +1,4 @@
-package com.mino.springlab.tut3;
+package com.mino.springlab.scenario3;
 
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
@@ -6,15 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile({"tut3", "pub-sub", "publish-subscribe"})
-public class Tut3Config {
+@Profile("scenario3")
+public class Config {
 
     @Bean
     public FanoutExchange fanout() {
         return new FanoutExchange("tut.fanout");
     }
 
-    @Profile("receiver")
     private static class ReceiverConfig {
 
         @Bean
@@ -28,24 +27,18 @@ public class Tut3Config {
         }
 
         @Bean
-        public Binding binding1(FanoutExchange fanout, Queue autoDeleteQueue1) {
-            return BindingBuilder.bind(autoDeleteQueue1).to(fanout);
+        public Binding binding1(FanoutExchange fanout, Queue autoDeleteQueue) {
+            return BindingBuilder.bind(autoDeleteQueue).to(fanout);
         }
 
         @Bean
-        public Binding binding2(FanoutExchange fanout, Queue autoDeleteQueue2) {
-            return BindingBuilder.bind(autoDeleteQueue2).to(fanout);
+        public Binding binding2(FanoutExchange fanout, Queue autoDeleteQueue) {
+            return BindingBuilder.bind(autoDeleteQueue).to(fanout);
         }
 
         @Bean
-        public Tut3Receiver receiver() {
-            return new Tut3Receiver();
+        public Receiver receiver() {
+            return new Receiver();
         }
-    }
-
-    @Profile("sender")
-    @Bean
-    public Tut3Sender sender() {
-        return new Tut3Sender();
     }
 }

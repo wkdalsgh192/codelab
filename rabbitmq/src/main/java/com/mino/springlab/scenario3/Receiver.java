@@ -1,9 +1,9 @@
-package com.mino.springlab.tut3;
+package com.mino.springlab.scenario3;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.util.StopWatch;
 
-public class Tut3Receiver {
+public class Receiver {
 
     @RabbitListener(queues = "#{autoDeleteQueue1.name}")
     public void receiver(String in) throws InterruptedException {
