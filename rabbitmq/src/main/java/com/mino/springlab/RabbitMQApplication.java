@@ -21,7 +21,7 @@ public class RabbitMQApplication {
 //    }
 
     @Bean
-//    @Profile("!usage_message")
+    @Profile("auto_close")
     public CommandLineRunner tutorial() {
         return new RabbitAmqpTutorialRunner();
     }

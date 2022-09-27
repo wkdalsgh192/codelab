@@ -1,15 +1,13 @@
-package com.mino.springlab.scenario3;
+package com.mino.springlab.scenario4;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.context.annotation.Profile;
 import org.springframework.util.StopWatch;
 
-@Profile("scenario3")
 public class Receiver {
 
     @RabbitListener(queues = "#{queue1.name}")
-    public void receiver(String in) throws InterruptedException {
-        receive(in, 1);
+    public void receive1(String in, int i) {
+        receive1(in, 1);
     }
 
     @RabbitListener(queues = "#{queue2.name}")
@@ -23,13 +21,16 @@ public class Receiver {
         System.out.println("instance " + receiver + " [x] Received '" + in + "'");
         doWork(in);
         watch.stop();
-        System.out.println("instance " + receiver + " [x] Done in " + watch.getTotalTimeSeconds() + "s");
+        System.out.println("instance " + receiver + " [x] Done in " +
+                watch.getTotalTimeSeconds() + "s");
     }
 
     private void doWork(String in) throws InterruptedException {
-        for (char ch:
-             in.toCharArray()) {
-            if (ch == '.') Thread.sleep(1000);
+        for (char ch : in.toCharArray()) {
+            if (ch == '.') {
+                Thread.sleep(1000);
+            }
         }
     }
+
 }

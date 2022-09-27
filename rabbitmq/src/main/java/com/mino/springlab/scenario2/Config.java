@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 @Profile({"scenario2"})
 public class Config {
 
-    @Bean
+    @Bean(name="queue2")
     public Queue hello() {
         return new Queue("hello");
     }
@@ -25,5 +25,10 @@ public class Config {
         public Receiver receiver2() {
             return new Receiver(2);
         }
+    }
+
+    @Bean
+    public Tut2Sender sender() {
+        return new Tut2Sender();
     }
 }

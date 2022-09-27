@@ -3,6 +3,7 @@ package com.mino.springlab.scenario3;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 @RequiredArgsConstructor
+@Profile("scenario3")
 public class Tut3Sender {
 
     private final RabbitTemplate template;
