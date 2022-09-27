@@ -1,6 +1,6 @@
-package com.mino.springlab.scenario4;
+package com.mino.springlab.scenario5;
 
-import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -8,20 +8,21 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Profile("scenario4")
-public class Tut4Sender {
+@Profile("scenario5")
+public class Tut5Sender {
 
     @Autowired
     private RabbitTemplate template;
 
     @Autowired
-    private DirectExchange direct;
+    private TopicExchange topic;
 
     AtomicInteger index = new AtomicInteger(0);
 
     AtomicInteger count = new AtomicInteger(0);
 
-    private final String[] keys = {"orange", "black", "green"};
+    private final String[] keys = {"quick.orange.rabbit", "lazy.orange.elephant", "quick.orange.fox",
+            "lazy.brown.fox", "lazy.pink.rabbit", "quick.brown.fox"};
 
     @Scheduled(fixedDelay = 1000, initialDelay = 500)
     public void send() {
@@ -32,7 +33,7 @@ public class Tut4Sender {
         builder.append(key).append(' ');
         builder.append(this.count.get());
         String message = builder.toString();
-        template.convertAndSend(direct.getName(), key, message);
+        template.convertAndSend(topic.getName(), key, message);
         System.out.println(" [x] Sent '" + message + "'");
     }
 }
