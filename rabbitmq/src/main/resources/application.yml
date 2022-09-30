@@ -10,6 +10,8 @@ spring:
     username: localrabbit
     password: localrabbit
     virtual-host: /
+    publisher-returns: true
+    publisher-confirm-type: correlated
 
 logging:
   level:
