@@ -52,7 +52,7 @@ public class Config {
         connectionFactory.setPassword("localrabbit");
         connectionFactory.setVirtualHost("/");
         // publisher confirm ON
-//        connectionFactory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.CORRELATED);
+        connectionFactory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.CORRELATED);
         return connectionFactory;
     }
 

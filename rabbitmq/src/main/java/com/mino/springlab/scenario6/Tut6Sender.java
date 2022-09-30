@@ -31,21 +31,23 @@ public class Tut6Sender {
         setupCallbacks();
     }
 
-    @Scheduled(fixedDelay = 1000, initialDelay = 500)
+    @Scheduled(fixedDelay = 5000, initialDelay = 500)
     public void send() throws ExecutionException, InterruptedException, TimeoutException {
         StringBuilder builder = new StringBuilder("Hello to ");
         if (index.incrementAndGet() == 3) index.set(0);
 
-//        String key = keys[index.get()];
         String key = "orange";
         builder.append(key).append(' ');
         builder.append(this.count.get());
         String message = builder.toString();
         CorrelationData correlationData = new CorrelationData("Correlation for message " + message);
-        rabbitTemplate.convertAndSend(direct.getName(), key, message, correlationData);
+        rabbitTemplate.convertAndSend(direct.getName(), key, message, msg -> {
+            System.out.println("Message after conversion: " + msg);
+            return msg;
+        }, correlationData);
+        System.out.println(" [x] Sent '" + message + "'");
         CorrelationData.Confirm confirm = correlationData.getFuture().get(10, TimeUnit.SECONDS);
         System.out.println("Confirm received, ack = " + confirm.isAck());
-        System.out.println(" [x] Sent '" + message + "'");
     }
 
     private void setupCallbacks() {
