@@ -9,6 +9,10 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.11.4'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.4'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.4'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.4'
     compileOnly 'org.springframework.boot:spring-boot-starter-web:2.6.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
