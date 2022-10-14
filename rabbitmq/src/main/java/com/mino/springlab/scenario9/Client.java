@@ -1,4 +1,4 @@
-package com.mino.springlab.scenario7;
+package com.mino.springlab.scenario9;
 
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

@@ -34,7 +34,7 @@ public class Tut8Sender {
 
     AtomicInteger count = new AtomicInteger(0);
 
-    @Scheduled(fixedDelay = 5000, initialDelay = 500)
+    @Scheduled(fixedDelay = 1000, initialDelay = 500)
     public void send() {
         new AMQP.BasicProperties().builder().type("");
         // 단순 스트링을 보내는 경우

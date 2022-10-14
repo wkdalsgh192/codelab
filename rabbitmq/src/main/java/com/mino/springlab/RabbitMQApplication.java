@@ -20,11 +20,11 @@ public class RabbitMQApplication {
 //        };
 //    }
 
-    @Bean
-    @Profile("auto_close")
-    public CommandLineRunner tutorial() {
-        return new RabbitAmqpTutorialRunner();
-    }
+//    @Bean
+//    @Profile("auto_close")
+//    public CommandLineRunner tutorial() {
+//        return new RabbitAmqpTutorialRunner();
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(RabbitMQApplication.class, args);
