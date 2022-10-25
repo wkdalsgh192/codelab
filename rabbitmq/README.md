@@ -2,8 +2,7 @@
 
 * 1.Spring AMQP를 이용해 Single Publisher 와 Consumer 로 메시지를 주고 받기
 * 2.Spring AMQP를 이용해 Single Publisher 와 Multi Consumers 로 메시지를 주고 받기
-* 3.Spring AMQP를 이용해 
-  * 익명 큐를 이용해 Publish, Consume 하기
+* 3.Spring AMQP를 이용해 익명 큐를 이용해 Publish, Consume 하기
 * 4.Spring AMQP를 이용해 Routing 하기
   * Fanout Exchange에 비해서 훨씬 빠르다
 * 5.Spring AMQP를 이용해 Topic에 따라 메시지를 보내기
@@ -24,7 +23,10 @@
   * 컨슈머가 두 개 이상이다.
   * 컨슈머 중 한 개가 다운되었다.
   * 해당 큐를 살리면서 다른 컨슈머에 연결할 수 있는 방법?
-* Spring AMQP에서 Exclusive하는 경우, 컨슈머가 죽었을 때 남아있는 메시지를 존속시키는 경우
+* 9.Spring AMQP에서 Exclusive하는 경우, 컨슈머가 죽었을 때 남아있는 메시지를 존속시키는 경우
+* 10.Error Handling
+  * Dead Letter Queue
+  * Dead Letter Exchange
 * Spring AMQP를 이용해 ListenerContainer 로 메시지 받기
   * ListenerHandler
   * RabbitListener

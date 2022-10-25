@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class Config {
 
-    @Bean(name="queue1")
+    @Bean
     public Queue hello() {
         return new Queue("hello");
     }

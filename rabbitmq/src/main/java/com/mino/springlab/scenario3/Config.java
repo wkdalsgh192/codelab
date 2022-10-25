@@ -19,7 +19,8 @@ public class Config {
 
         @Bean(name={"queue1"})
         public Queue autoDeleteQueue1() {
-            return new AnonymousQueue();
+            return new AnonymousQueue(new MinhoNamingStrategy("minhoJang-"));
+//            return new AnonymousQueue();
         }
 
         @Bean(name={"queue2"})

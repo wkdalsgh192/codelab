@@ -1,10 +1,12 @@
 package com.mino.springlab.scenario9;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.messaging.handler.annotation.SendTo;
 
 public class Server {
 
-    @RabbitListener(queues = "tut.rpc.requests")
+    @RabbitListener(queues = "#{rpc.name}")
+    @SendTo("")
     public int fibonacci(int n) {
         System.out.println(" [x] Received request for " + n);
         int result = fib(n);

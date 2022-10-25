@@ -14,7 +14,7 @@ public class Tut1Sender {
     private RabbitTemplate template;
 
     @Autowired
-    @Qualifier("queue1")
+    @Qualifier("hello")
     private Queue queue;
 
     @Scheduled(fixedDelay = 1000, initialDelay = 500)

@@ -3,7 +3,6 @@ package com.mino.springlab.scenario7;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -25,31 +24,45 @@ public class Config {
     @Bean
     public TopicExchange topic() {return new TopicExchange("tut.topic");}
 
-    @Bean
-    public Queue hello() {
-        return new Queue("hello", false, true, false);
+    @Profile("receiver1")
+    private static class ReceiverConfig1 {
+        @Bean
+        public Queue autoDeleteQueue1() {
+            return new AnonymousQueue();
+        }
+
+        @Bean
+        public Binding binding1(FanoutExchange fanout, Queue autoDeleteQueue1) {
+            return BindingBuilder.bind(autoDeleteQueue1).to(fanout);
+        }
+        @Bean
+        public Receiver1 receiver1() {
+            return new Receiver1();
+        }
     }
 
-    @Bean
-    public Binding binding1a(FanoutExchange fanout, Queue hello) {
-        return BindingBuilder.bind(hello).to(fanout);
+    @Profile("receiver2")
+    private static class ReceiverConfig2 {
+        @Bean
+        public Queue autoDeleteQueue2() {
+            return new AnonymousQueue();
+        }
+
+        @Bean
+        public Binding binding2(FanoutExchange fanout, Queue autoDeleteQueue2) {
+            return BindingBuilder.bind(autoDeleteQueue2).to(fanout);
+        }
+
+        @Bean
+        public Receiver2 receiver2() {
+            return new Receiver2();
+        }
     }
+
 
     @Bean
     @Profile("sender")
     public Tut7Sender sender() { return new Tut7Sender(); }
-
-    @Bean
-    @Profile("receiver1")
-    public Receiver receiver1() {
-        return new Receiver(1);
-    }
-
-    @Bean
-    @Profile("receiver2")
-    public Receiver receiver2() {
-        return new Receiver(2);
-    }
 
     @Bean
     public ConnectionFactory rabbitConnectionFactory() {

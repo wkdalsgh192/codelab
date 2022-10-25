@@ -1,23 +1,14 @@
 package com.mino.springlab.scenario7;
 
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.util.StopWatch;
 
-@RabbitListener(queues = "hello")
-public class Receiver {
+public class Receiver1 {
 
-    private final int instance;
-
-    public Receiver(int i) {
-        this.instance = i;
-    }
-
-    @RabbitHandler
+    @RabbitListener(queues = "#{autoDeleteQueue1.name}")
     public void receive(String in) throws InterruptedException {
-        System.out.println("Instance " + instance + " [x] Received '" + in + "'");
+        System.out.println("Instance 1 [x] Received '" + in + "'");
         doWork(in);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
     }
 
     private void doWork(String in) throws InterruptedException {

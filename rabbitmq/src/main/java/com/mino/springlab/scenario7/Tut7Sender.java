@@ -19,7 +19,7 @@ public class Tut7Sender {
 
     AtomicInteger count = new AtomicInteger(0);
 
-    @Scheduled(fixedDelay = 500, initialDelay = 500)
+    @Scheduled(fixedDelay = 1000, initialDelay = 500)
     public void send() {
         StringBuilder builder = new StringBuilder("Hello to ");
         if (index.incrementAndGet() == 3) index.set(0);

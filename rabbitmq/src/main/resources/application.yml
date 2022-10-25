@@ -12,6 +12,9 @@ spring:
     virtual-host: /
     publisher-returns: true
     publisher-confirm-type: correlated
+    listener:
+      simple:
+        prefetch: 10
 
 logging:
   level:

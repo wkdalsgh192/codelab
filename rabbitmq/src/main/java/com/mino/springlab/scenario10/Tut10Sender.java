@@ -1,31 +1,25 @@
-package com.mino.springlab.scenario2;
+package com.mino.springlab.scenario10;
 
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Component
-@Profile("scenario2")
-public class Tut2Sender {
+public class Tut10Sender {
 
     @Autowired
     private RabbitTemplate template;
 
     @Autowired
-    @Qualifier("hello")
-    private Queue queue;
+    private DirectExchange direct;
 
     AtomicInteger dots = new AtomicInteger(0);
 
     AtomicInteger count = new AtomicInteger(0);
 
-    @Scheduled(fixedDelay = 1000, initialDelay = 500)
+    @Scheduled(fixedDelay = 5000, initialDelay = 500)
     public void send() {
         StringBuilder builder = new StringBuilder("Hello");
         if (dots.incrementAndGet() == 4) {
@@ -38,7 +32,7 @@ public class Tut2Sender {
 
         builder.append(count.incrementAndGet());
         String message = builder.toString();
-        template.convertAndSend(queue.getName(), message);
-        System.out.println(" [x] Sent '" + message + "'");
+        template.convertAndSend(direct.getName(), "hello-queue", message);
+        System.out.println(" [x] Sent '" + message + " to" + direct.getName() +"'");
     }
 }
