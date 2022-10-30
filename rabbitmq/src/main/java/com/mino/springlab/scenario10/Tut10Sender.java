@@ -48,7 +48,7 @@ public class Tut10Sender {
 
     AtomicInteger count = new AtomicInteger(0);
 
-    @Scheduled(fixedDelay = 5000, initialDelay = 500)
+    @Scheduled(fixedDelay = 1000, initialDelay = 500)
     public void send() {
         StringBuilder builder = new StringBuilder("Hello");
         if (dots.incrementAndGet() == 4) {

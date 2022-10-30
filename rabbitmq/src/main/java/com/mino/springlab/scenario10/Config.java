@@ -37,7 +37,8 @@ public class Config {
 
     @Bean
     public Queue initialQueue() {
-        return QueueBuilder.nonDurable("q1").deadLetterExchange(DEAD_LETTER_EXCHANGE).build();
+//        return QueueBuilder.nonDurable("q1").deadLetterExchange(DEAD_LETTER_EXCHANGE).build();
+        return QueueBuilder.nonDurable("q1").deadLetterExchange(DEAD_LETTER_EXCHANGE).ttl(1000).build();
     }
 
     @Bean

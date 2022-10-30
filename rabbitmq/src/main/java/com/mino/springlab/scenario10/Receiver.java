@@ -13,19 +13,12 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 public class Receiver {
 
     @RabbitListener(queues = "#{initialQueue.name}")
-    public void onMessageQ1(Message message) {
+    public void onMessageQ1(Message message) throws InterruptedException {
         System.out.println(" [x] Q1 Received '" + new String(message.getBody()) + "'");
-        printHeaders(message.getMessageProperties());
+        Thread.sleep(10000L);
 
         // message reject
         throw new AmqpRejectAndDontRequeueException("ABCD");
-    }
-
-    private void printHeaders(MessageProperties properties) {
-        System.out.println("  HEADERS " + properties.getHeaders().size());
-        properties.getHeaders().forEach((key, value) -> {
-            System.out.println("      " + key + ":" + value);
-        });
     }
 
     @RabbitListener(queues = "#{deadLetterQueue.name}")
