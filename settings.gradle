@@ -1,3 +1,4 @@
 rootProject.name = 'springlab'
 include 'rabbitmq'
+include 'spring'
 

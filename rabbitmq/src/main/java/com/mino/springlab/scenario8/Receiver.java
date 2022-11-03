@@ -1,19 +1,12 @@
 package com.mino.springlab.scenario8;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 
-@RabbitListener(queues = "hello")
 @RequiredArgsConstructor
 public class Receiver {
-
-    private final int instance;
-
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -27,12 +20,12 @@ public class Receiver {
 //        watch.stop();
 //    }
 
-    @RabbitHandler
-    public void receive(Employee em) {
+//    @RabbitListener(queues = "eunbi.queue", containerFactory = "simpleRabbitListenerContainerFactory")
+    public void receive(Employee employee) {
         StopWatch watch = new StopWatch();
         watch.start();
-        System.out.println("instance " + this.instance + " [x] Received '" + em + " jdiowadkla"+"'");
-        System.out.println(em);
+        System.out.println(" [x] Received '" + employee + " jdiowadkla"+"'");
+        System.out.println(employee);
 //        try {
 //            Employee emp = objectMapper.readValue(em, Employee.class);
 //

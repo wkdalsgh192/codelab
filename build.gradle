@@ -34,17 +34,35 @@ subprojects {
     }
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-amqp'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation 'org.springframework.amqp:spring-rabbit-test'
         compileOnly 'org.springframework.boot:spring-boot-devtools'
     }
 
     test {
         useJUnitPlatform()
+    }
+
+    project(':rabbitmq') {
+        bootJar { enabled = false }
+        jar { enabled = true }
+
+        dependencies {
+            implementation 'org.springframework.boot:spring-boot-starter-amqp'
+            testImplementation 'org.springframework.amqp:spring-rabbit-test'
+        }
+    }
+
+    project(':spring') {
+        bootJar { enabled = false }
+        jar { enabled = true }
+
+        dependencies {
+
+
+        }
     }
 
 }
