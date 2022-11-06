@@ -1,3 +1,11 @@
+## Lectures
+* 1. Json Format Customization
+* 2. Direct Exchange
+* 3. Topic Exchange
+* 4. Dead Letter
+* 5. Retry Mechanism
+
+
 ## Scenario
 
 * 1.Spring AMQP를 이용해 Single Publisher 와 Consumer 로 메시지를 주고 받기

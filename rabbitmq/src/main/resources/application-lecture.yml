@@ -7,11 +7,9 @@ spring:
     username: localrabbit
     password: localrabbit
     virtual-host: /
-    publisher-returns: true
-    publisher-confirm-type: correlated
     listener:
       simple:
-        prefetch: 10
+        acknowledge-mode: manual
 
 logging:
   level:

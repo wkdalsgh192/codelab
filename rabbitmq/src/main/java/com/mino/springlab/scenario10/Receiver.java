@@ -8,7 +8,6 @@ import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 
 
-@RequiredArgsConstructor
 @Slf4j
 public class Receiver {
 
