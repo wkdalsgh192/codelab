@@ -6,8 +6,8 @@ import org.springframework.util.StopWatch;
 public class Receiver {
 
     @RabbitListener(queues = "#{queue1.name}")
-    public void receive1(String in, int i) {
-        receive1(in, 1);
+    public void receive1(String in, int i) throws InterruptedException {
+        receive(in, 1);
     }
 
     @RabbitListener(queues = "#{queue2.name}")
@@ -21,8 +21,6 @@ public class Receiver {
         System.out.println("instance " + receiver + " [x] Received '" + in + "'");
         doWork(in);
         watch.stop();
-        System.out.println("instance " + receiver + " [x] Done in " +
-                watch.getTotalTimeSeconds() + "s");
     }
 
     private void doWork(String in) throws InterruptedException {

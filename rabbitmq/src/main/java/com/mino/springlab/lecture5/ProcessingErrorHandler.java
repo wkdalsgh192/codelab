@@ -36,11 +36,11 @@ public class ProcessingErrorHandler {
 
         try {
             if (rabbitHeader.getFailedRetryCount() >= MAX_RETRY_COUNT) {
-                log.warn(" [x] on Dead Letter at {} on retry {} for message: {}", LocalDateTime.now(), rabbitHeader.getFailedRetryCount(), jsonString);
+                log.warn(" [x] to Dead Letter at {} on retry {} for message: {}", LocalDateTime.now(), rabbitHeader.getFailedRetryCount(), jsonString);
                 channel.basicPublish(getDeadExchangeName(), message.getMessageProperties().getReceivedRoutingKey(), null, message.getBody());
                 channel.basicAck(deliveryTag, false);
             } else {
-                log.warn(" [x] on Requeue Error at {} on retry {} for message {}", LocalDateTime.now(), rabbitHeader.getFailedRetryCount(), jsonString);
+                log.warn(" [x] to Requeue Error at {} on retry {} for message {}", LocalDateTime.now(), rabbitHeader.getFailedRetryCount(), jsonString);
                 channel.basicReject(deliveryTag, false);
             }
         } catch (IOException e) {

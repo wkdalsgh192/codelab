@@ -59,17 +59,6 @@ public class Config {
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory rabbitConnectionFactory) {
         RabbitTemplate template = new RabbitTemplate(rabbitConnectionFactory);
-//        template.setConfirmCallback((correlation, ack, reason) -> {
-//            if (correlation != null) {
-//                System.out.println("Received " + (ack ? " ack " : " nack ") + "for correlation: " + correlation);
-//            }
-//        });
-//
-//        template.setReturnsCallback(returned -> {
-//            System.out.println("Returned: " + returned.getMessage() + "\nreplyCode: " + returned.getReplyCode()
-//                    + "\nreplyText: " + returned.getReplyText() + "\nexchange/rk: "
-//                    + returned.getExchange() + "/" + returned.getRoutingKey());
-//        });
         return template;
     }
 }

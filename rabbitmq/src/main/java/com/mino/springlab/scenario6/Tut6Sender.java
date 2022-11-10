@@ -24,8 +24,6 @@ public class Tut6Sender {
 
     AtomicInteger count = new AtomicInteger(0);
 
-//    private final String[] keys = {"orange", "black", "green"};
-
     @PostConstruct
     private void postConstruct() {
         setupCallbacks();
@@ -38,13 +36,10 @@ public class Tut6Sender {
 
         String key = "orange";
         builder.append(key).append(' ');
-        builder.append(this.count.get());
+        builder.append(this.count.getAndIncrement());
         String message = builder.toString();
         CorrelationData correlationData = new CorrelationData("Correlation for message " + message);
-        rabbitTemplate.convertAndSend(direct.getName(), key, message, msg -> {
-            System.out.println("Message after conversion: " + msg);
-            return msg;
-        }, correlationData);
+        rabbitTemplate.convertAndSend(direct.getName(), key, message, correlationData);
         System.out.println(" [x] Sent '" + message + "'");
         CorrelationData.Confirm confirm = correlationData.getFuture().get(10, TimeUnit.SECONDS);
         System.out.println("Confirm received, ack = " + confirm.isAck());

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Header;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.time.LocalDateTime;
 
 @Slf4j
 public class PictureVectorConsumer {
@@ -41,8 +41,16 @@ public class PictureVectorConsumer {
             log.error(" [x] On Error: {}", jsonString + ": " + e.getMessage());
             processingErrorHandler.handleErrorMessage(message, channel, deliveryTag);
         }
+    }
 
-
-
+    @RabbitListener(queues = "q.guideline.vector.dead")
+    public void listenDeadLetter(Message message, Channel channel , @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag)  {
+        try {
+            var messageStr = new String(message.getBody());
+            log.info(" [x] on Vector Dead Letter at {} for message: {}", LocalDateTime.now(), messageStr);
+            channel.basicAck(deliveryTag, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

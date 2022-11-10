@@ -21,17 +21,27 @@ public class Tut5Sender {
 
     AtomicInteger count = new AtomicInteger(0);
 
+    /**
+     * 예상 라우팅 결과
+     * quick.orange.rabbit: 인스턴스 1
+     * lazy.orange.elephant: 인스턴스 1 & 2
+     * quick.orange.fox: 인스턴스 1
+     * lazy.brown.fox: 인스턴스 2
+     * lazy.pink.rabbit: 인스턴스 1 & 2
+     * quick.brown.fox: none
+     * */
+
     private final String[] keys = {"quick.orange.rabbit", "lazy.orange.elephant", "quick.orange.fox",
             "lazy.brown.fox", "lazy.pink.rabbit", "quick.brown.fox"};
 
-    @Scheduled(fixedDelay = 1000, initialDelay = 500)
+    @Scheduled(fixedDelay = 5000, initialDelay = 500)
     public void send() {
         StringBuilder builder = new StringBuilder("Hello to ");
-        if (index.incrementAndGet() == 3) index.set(0);
+        if (index.incrementAndGet() == 6) index.set(0);
 
         String key = keys[index.get()];
         builder.append(key).append(' ');
-        builder.append(this.count.get());
+        builder.append(this.count.getAndIncrement());
         String message = builder.toString();
         template.convertAndSend(topic.getName(), key, message);
         System.out.println(" [x] Sent '" + message + "'");

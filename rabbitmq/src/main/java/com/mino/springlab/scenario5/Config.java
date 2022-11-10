@@ -1,6 +1,5 @@
 package com.mino.springlab.scenario5;
 
-import com.mino.springlab.scenario3.Receiver;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

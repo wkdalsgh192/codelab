@@ -21,16 +21,22 @@ public class Tut4Sender {
 
     AtomicInteger count = new AtomicInteger(0);
 
+    /**
+     * 예상 라우팅 결과
+     * black: 인스턴스 1 & 2
+     * orange: 인스턴스 1
+     * green: 인스턴스 2
+     * */
     private final String[] keys = {"orange", "black", "green"};
 
-    @Scheduled(fixedDelay = 1000, initialDelay = 500)
+    @Scheduled(fixedDelay = 5000, initialDelay = 500)
     public void send() {
         StringBuilder builder = new StringBuilder("Hello to ");
         if (index.incrementAndGet() == 3) index.set(0);
 
         String key = keys[index.get()];
         builder.append(key).append(' ');
-        builder.append(this.count.get());
+        builder.append(this.count.getAndIncrement());
         String message = builder.toString();
         template.convertAndSend(direct.getName(), key, message);
         System.out.println(" [x] Sent '" + message + "'");

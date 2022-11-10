@@ -7,16 +7,11 @@ spring:
     username: localrabbit
     password: localrabbit
     virtual-host: /
+    publisher-returns: true
+    publisher-confirm-type: correlated
     listener:
       simple:
-        acknowledge-mode: manual
-#        retry:
-#          enabled: true
-#          initial-interval: 3s
-#          max-interval: 10s
-#          max-attempts: 5
-#          multiplier: 2
-
+        prefetch: 10
 
 logging:
   level:

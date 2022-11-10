@@ -1,8 +1,6 @@
 package com.mino.springlab.scenario10;
 
-import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -48,7 +46,7 @@ public class Tut10Sender {
 
     AtomicInteger count = new AtomicInteger(0);
 
-    @Scheduled(fixedDelay = 1000, initialDelay = 500)
+    @Scheduled(fixedDelay = 10000, initialDelay = 500)
     public void send() {
         StringBuilder builder = new StringBuilder("Hello");
         if (dots.incrementAndGet() == 4) {

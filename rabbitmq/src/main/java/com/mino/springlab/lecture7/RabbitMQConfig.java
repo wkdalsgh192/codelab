@@ -1,13 +1,10 @@
-package com.mino.springlab.lecture5;
+package com.mino.springlab.lecture7;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile("lecture5")
+@Profile("lecture7")
 @Configuration
 public class RabbitMQConfig {
 
@@ -86,15 +83,13 @@ public class RabbitMQConfig {
 //    }
 
     @Bean
-    public PictureProducer producer() {
-        return new PictureProducer();
+    public SpringPictureProducer producer() {
+        return new SpringPictureProducer();
     }
 
     @Bean
-    public PictureImageConsumer imageConsumer() {
-        return new PictureImageConsumer();
+    public SpringPictureConsumer pictureConsumer() {
+        return new SpringPictureConsumer();
     }
 
-    @Bean
-    public PictureVectorConsumer vectorConsumer() { return new PictureVectorConsumer(); }
 }
