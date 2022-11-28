@@ -22,7 +22,7 @@ public class EmployeeProducer {
 
     AtomicInteger idx = new AtomicInteger(0);
 
-    @Scheduled(fixedDelay = 5000, initialDelay = 500)
+    @Scheduled(fixedDelay = 10000, initialDelay = 500)
     public void sendMessage() throws JsonProcessingException {
         var employee = new Employee("emp-" + idx.getAndIncrement(), null, LocalDate.now());
         var json = objectMapper.writeValueAsString(employee);

@@ -12,6 +12,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,14 +28,25 @@ public class AccountingConsumer {
         try {
             var emp = objectMapper.readValue(messageStr, Employee.class);
 
-            if (!StringUtils.hasText(emp.getName())) throw new IllegalArgumentException("Name is empty");
-            else {
+            if (StringUtils.hasText(emp.getName())) {
                 log.info(" [x] On accounting: {}", emp);
                 channel.basicAck(deliverytag, false);
             }
-        } catch (IOException e) {
+            else throw new IllegalArgumentException("Name is empty");
+        } catch (IllegalArgumentException | IOException e) {
             log.info(" [x] Error Occurred While Consuming Message: {}", messageStr);
             processingErrorHandler.handleErrorMessage(message, channel, deliverytag);
+        }
+    }
+
+    @RabbitListener(queues = "q.guideline2.accounting.dead")
+    public void listenDeadLetter(Message message, Channel channel , @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag)  {
+        try {
+            var messageStr = new String(message.getBody());
+            log.info(" [x] on Accounting Dead Letter at {} for message: {}", LocalDateTime.now(), messageStr);
+            channel.basicAck(deliveryTag, false);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

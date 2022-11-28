@@ -25,11 +25,11 @@ public class SpringPictureProducer {
 
     private Integer num = 0;
 
-    @Scheduled(fixedDelay = 5000, initialDelay = 500)
+    @Scheduled(fixedDelay = 10000, initialDelay = 500)
     public void sendMessage() throws JsonProcessingException {
         var picture = new Picture();
         picture.setName("Picture: " + num++);
-        picture.setSize(ThreadLocalRandom.current().nextLong(7500, 10000));
+        picture.setSize(ThreadLocalRandom.current().nextLong(8000, 10000));
         picture.setSource(SOURCES.get(num % SOURCES.size()));
         picture.setType(TYPES.get(num % TYPES.size()));
         var json = objectMapper.writeValueAsString(picture);

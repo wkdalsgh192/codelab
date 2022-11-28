@@ -22,7 +22,7 @@ public class MarketingConsumer {
     throws IOException {
         var messageStr = new String(message.getBody());
         var emp = objectMapper.readValue(messageStr, Employee.class);
-        log.info(" [x] On accounting: {}", emp);
+        log.info(" [x] On marketing: {}", emp);
         channel.basicAck(deliverytag, false);
     }
 }
