@@ -7,15 +7,15 @@ spring:
     username: localrabbit
     password: localrabbit
     virtual-host: /
-    listener:
-      simple:
-        acknowledge-mode: auto
-        retry:
-          enabled: true
-          initial-interval: 3s
-          max-interval: 10s
-          max-attempts: 5
-          multiplier: 2
+#    listener:
+#      simple:
+#        acknowledge-mode: auto
+#        retry:
+#          enabled: true
+#          initial-interval: 3s
+#          max-interval: 10s
+#          max-attempts: 5
+#          multiplier: 2
 
 
 logging:

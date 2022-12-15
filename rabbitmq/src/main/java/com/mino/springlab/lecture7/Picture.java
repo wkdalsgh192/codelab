@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+public
 class Picture {
     private String name;
     private String type;
